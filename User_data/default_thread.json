@@ -1,0 +1,12 @@
+{
+  "name": "User Name",
+  "email": "user@example.com",
+  "interests": [
+    "1",
+    "2",
+    "3"
+  ],
+  "experience": "advanced",
+  "goals": "user goals",
+  "notifications": false
+}
