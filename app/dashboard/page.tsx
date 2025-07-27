@@ -5,14 +5,13 @@ import type React from "react"
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { ScrollArea } from "@/components/ui/scroll-area"
-import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
-import { Calendar, Grid3X3, MessageCircle, Send, User } from "lucide-react"
+import { Calendar, Grid3X3, User } from "lucide-react"
 import { C1Chat } from "@thesysai/genui-sdk"
+import { ProfileCard } from "@/components/ui/profile-card"
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
 import "@crayonai/react-ui/styles/index.css"
+import "./chat.css";
 
 export default function DashboardPage() {
   const router = useRouter()
@@ -35,6 +34,17 @@ export default function DashboardPage() {
             {userPreferences && <Badge variant="secondary">Welcome, {userPreferences.name}!</Badge>}
           </div>
           <div className="flex items-center space-x-2">
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button variant="outline" className="flex items-center space-x-2">
+                  <User className="h-4 w-4" />
+                  <span>About You</span>
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="sm:max-w-[425px]">
+                <ProfileCard userPreferences={userPreferences} />
+              </DialogContent>
+            </Dialog>
             <Button variant="outline" onClick={() => router.push("/catalog")} className="flex items-center space-x-2">
               <Grid3X3 className="h-4 w-4" />
               <span>Catalog</span>
@@ -47,52 +57,13 @@ export default function DashboardPage() {
         </div>
       </header>
 
-      <div className="flex h-[calc(100vh-80px)]">
-        {/* Sidebar with user info */}
-        <div className="w-80 bg-white border-r border-gray-200 p-6">
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center space-x-2">
-                <User className="h-5 w-5" />
-                <span>Your Profile</span>
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              {userPreferences && (
-                <>
-                  <div>
-                    <p className="text-sm font-medium text-gray-700">Interests</p>
-                    <div className="flex flex-wrap gap-1 mt-1">
-                      {userPreferences.interests?.map((interest: string) => (
-                        <Badge key={interest} variant="secondary" className="text-xs">
-                          {interest}
-                        </Badge>
-                      ))}
-                    </div>
-                  </div>
-                  <div>
-                    <p className="text-sm font-medium text-gray-700">Experience</p>
-                    <p className="text-sm text-gray-600 capitalize">{userPreferences.experience}</p>
-                  </div>
-                  {userPreferences.goals && (
-                    <div>
-                      <p className="text-sm font-medium text-gray-700">Goals</p>
-                      <p className="text-sm text-gray-600">{userPreferences.goals}</p>
-                    </div>
-                  )}
-                </>
-              )}
-            </CardContent>
-          </Card>
-        </div>
-
+      <div className="flex h-[calc(100dvh-200px)]">
         {/* Chat Interface */}
         <div className="flex-1 p-4">
           <C1Chat apiUrl="/api/chat"
           formFactor="full-page"
            />
         </div>
-        
       </div>
     </div>
   )

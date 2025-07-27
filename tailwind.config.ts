@@ -12,7 +12,16 @@ const config: Config = {
   ],
   theme: {
   	extend: {
+  		fontFamily: {
+  			'cabinet-grotesk': ['Cabinet Grotesk', 'sans-serif'],
+  		},
   		colors: {
+			gradient: {
+				1: 'from-[#710F11] to-[#D7671C]',
+				2: 'from-[#F6EFE3] to-[##EDE3D4]',
+				
+			  },
+
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {
