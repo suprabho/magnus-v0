@@ -1,3 +1,5 @@
+@import url('https://fonts.cdnfonts.com/css/cabinet-grotesk');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -45,7 +47,7 @@
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
   .dark {
-    --background: 0 0% 3.9%;
+    --background: 0 0% 3.9%;  
     --foreground: 0 0% 98%;
     --card: 0 0% 3.9%;
     --card-foreground: 0 0% 98%;
@@ -86,5 +88,12 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: 'Cabinet Grotesk', sans-serif;
+  }
+}
+
+@layer components {
+  .gradient-heading {
+    @apply text-3xl font-bold bg-gradient-to-r from-[#710F11] to-[#D7671C] text-transparent bg-clip-text;
   }
 }

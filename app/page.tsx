@@ -20,7 +20,7 @@ export default function PreferencesPage() {
   const [preferences, setPreferences] = useState({
     name: "",
     email: "",
-    interests: [] as string[],
+    interests: [] as string[],   
     experience: "",
     goals: "",
     notifications: false,
@@ -74,10 +74,10 @@ export default function PreferencesPage() {
   const progress = ((currentStep + 1) / steps.length) * 100
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
-      <Card className="w-full max-w-2xl">
+    <div className="min-h-screen bg-gradient-to-br from-[#FDF5EB] to-[#F6EFE3] flex items-center justify-center p-4">
+      <Card className="w-full max-w-2xl bg-blur rounded-3xl shadow-2xl border-gradient-to-r from-[#ffffff00] to-[#FFFFFF]">
         <CardHeader className="text-center">
-          <CardTitle className="text-3xl font-bold text-gray-900">Welcome!</CardTitle>
+          <CardTitle className="gradient-heading">Welcome!</CardTitle>
           <CardDescription className="text-lg">
             Let's personalize your experience by learning about your preferences
           </CardDescription>
@@ -192,15 +192,17 @@ export default function PreferencesPage() {
               type="button"
               variant="outline"
               onClick={handlePrevious}
-              disabled={currentStep === 0}>
+              disabled={currentStep === 0}
+              className="border-[#710F11] gradient-heading rounded-full"
+              >
               Previous
             </Button>
             {currentStep === steps.length - 1 ? (
-              <Button type="submit" onClick={handleSubmit}>
+              <Button type="submit" className="bg-gradient-to-r from-[#710F11] to-[#D7671C] text-white rounded-full" onClick={handleSubmit}>
                 Complete Setup
               </Button>
             ) : (
-              <Button type="button" onClick={handleNext}>
+              <Button type="button" className="bg-gradient-to-r from-[#710F11] to-[#D7671C] text-white rounded-full" onClick={handleNext}>
                 Next
               </Button>
             )}
