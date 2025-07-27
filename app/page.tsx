@@ -65,9 +65,29 @@ export default function PreferencesPage() {
     }
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     localStorage.setItem("userPreferences", JSON.stringify(preferences))
+// 
+// Send to backend to store as JSON
+    try {
+      const response = await fetch("/api/savePreferences", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(preferences)
+      });
+
+      const result = await response.json();
+      if (result.success) {
+        console.log("✅ Preferences saved to file:", result.file);
+      } else {
+        console.error("❌ Failed to save preferences:", result.error);
+      }
+    } catch (err) {
+      console.error("Error in API call:", err);
+    }
+
+// 
     router.push("/dashboard")
   }
 
